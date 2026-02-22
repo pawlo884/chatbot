@@ -70,7 +70,7 @@ def _build_tagi(nazwa, destynacja, czas_trwania):
 
 
 def _wczytaj_locs_z_sitemap(path):
-    """Zwraca listę URL-i z sitemap (wszystkie <loc> pod wycieczki, bez ?)."""
+    """Zwraca listę URL-i z sitemap: <loc> pod wycieczki (bez ?) oraz z ? – dodajemy bazę (bez query) jako listing 1–2 seg."""
     urls = []
     try:
         tree = ET.parse(path)
@@ -80,7 +80,16 @@ def _wczytaj_locs_z_sitemap(path):
             if loc.text is None:
                 continue
             u = loc.text.strip()
-            if "?" in u or not u.startswith(WYCIECZKI_PREFIX):
+            if not u.startswith(WYCIECZKI_PREFIX):
+                continue
+            if "?" in u:
+                base = u.split("?")[0].strip().rstrip("/")
+                if not base or base == WYCIECZKI_PREFIX.rstrip("/"):
+                    continue
+                suf = base[len(WYCIECZKI_PREFIX) :].lstrip("/")
+                segmenty = [s for s in suf.split("/") if s]
+                if len(segmenty) in (1, 2):
+                    urls.append(base)
                 continue
             suf = u[len(WYCIECZKI_PREFIX) :].rstrip("/")
             if not suf:
@@ -90,9 +99,17 @@ def _wczytaj_locs_z_sitemap(path):
         try:
             with open(path, encoding="utf-8") as f:
                 content = f.read()
-            for m in re.finditer(r"<loc>(https://seeplaces\.com/pl/wycieczki/[^<?]+)</loc>", content):
+            for m in re.finditer(r"<loc>(https://seeplaces\.com/pl/wycieczki/[^<]+)</loc>", content):
                 u = m.group(1).strip()
+                if not u.startswith(WYCIECZKI_PREFIX):
+                    continue
                 if "?" in u:
+                    base = u.split("?")[0].strip().rstrip("/")
+                    if base and base != WYCIECZKI_PREFIX.rstrip("/"):
+                        suf = base[len(WYCIECZKI_PREFIX) :].lstrip("/")
+                        segmenty = [s for s in suf.split("/") if s]
+                        if len(segmenty) in (1, 2):
+                            urls.append(base)
                     continue
                 suf = u[len(WYCIECZKI_PREFIX) :].rstrip("/")
                 if suf:
