@@ -200,6 +200,18 @@ def _dopasuj_semantycznie(wiadomosc, oferty, model, embeddings):
     return indexed
 
 
+def _filtr_prog_semantyczny(wyniki, min_frac=0.78):
+    """Zostawia tylko oferty o score bliskim najlepszemu – semantyka odcina słabe dopasowania."""
+    if not wyniki:
+        return wyniki
+    max_score = wyniki[0][0]
+    if max_score <= 0:
+        return wyniki
+    prog = max_score * min_frac
+    out = [(s, o) for s, o in wyniki if s >= prog]
+    return out if out else wyniki[:10]
+
+
 def _filtr_destynacja(wyniki, slowa):
     """Zostawia tylko oferty z destynacjami wskazanymi przez słowa (min. 4 znaki)."""
     slowa_w_destynacjach = set()
@@ -225,6 +237,10 @@ _STOPWORDS_AKTYWNOSC = {
 }
 
 
+# Gdy słowo z zapytania zawiera to (np. ponurkować), dodajemy rdzeń do dopasowania ofert
+_AKTYWNOSC_RDZENIE = {"nurk": "nurk", "snork": "nurk", "bugg": "bugg", "konn": "kon", "jeźdz": "jeźd", "jezdz": "jeźd"}
+
+
 def _filtr_aktywnosc(wyniki, wiadomosc):
     """Gdy zapytanie opisuje konkretną aktywność – zostaw tylko oferty, które o niej mówią."""
     slowa = [
@@ -234,8 +250,12 @@ def _filtr_aktywnosc(wyniki, wiadomosc):
     ]
     if not slowa:
         return wyniki
-    # rdzenie min. 4 znaki, żeby "mam" nie trafiło w "hammam"
     rdzenie = set(s[:4] for s in slowa)
+    for s in slowa:
+        for key, r in _AKTYWNOSC_RDZENIE.items():
+            if key in s:
+                rdzenie.add(r)
+                break
     dopasowane = []
     for score, o in wyniki:
         tekst = " ".join([
@@ -263,6 +283,7 @@ def dopasuj_oferty(wiadomosc, oferty):
     embeddings, _ = _get_oferty_embeddings(oferty, model)
     if model is not None and embeddings is not None:
         wyniki = _dopasuj_semantycznie(wiadomosc, oferty, model, embeddings)
+        wyniki = _filtr_prog_semantyczny(wyniki)
         wyniki = _filtr_destynacja(wyniki, slowa)
         wyniki = _filtr_aktywnosc(wyniki, wiadomosc)
         return [o for _, o in wyniki[:10]]
