@@ -215,6 +215,42 @@ def _filtr_destynacja(wyniki, slowa):
     return [(score, o) for score, o in wyniki if any(_slowo_w_destynacji(s, o.get("destynacja", "")) for s in slowa_w_destynacjach)]
 
 
+# Słowa pomijane przy wyciąganiu „aktywności” z zapytania
+_STOPWORDS_AKTYWNOSC = {
+    "chce", "chcę", "się", "na", "dla", "niech", "proszę", "szukam", "szukamy",
+    "jest", "będzie", "może", "albo", "lub", "czy", "gdzie", "kiedy", "jak",
+    "wycieczk", "wczasy", "oferty", "propozycj", "coś", "nic",
+    "mam", "ochotę", "ochota", "mieć", "bardzo", "trochę", "raczej",
+}
+
+
+def _filtr_aktywnosc(wyniki, wiadomosc):
+    """Gdy zapytanie opisuje konkretną aktywność – zostaw tylko oferty, które o niej mówią."""
+    slowa = [
+        w.strip().lower()
+        for w in re.findall(r"[a-ząćęłńóśźż]+", wiadomosc.lower())
+        if len(w.strip()) >= 4 and w.strip() not in _STOPWORDS_AKTYWNOSC
+    ]
+    if not slowa:
+        return wyniki
+    # rdzenie min. 4 znaki, żeby "mam" nie trafiło w "hammam"
+    rdzenie = set(s[:4] for s in slowa)
+    dopasowane = []
+    for score, o in wyniki:
+        tekst = " ".join([
+            o.get("nazwa", ""),
+            o.get("opis", ""),
+            " ".join(o.get("tagi", [])),
+        ]).lower()
+        for r in rdzenie:
+            if r in tekst:
+                dopasowane.append((score, o))
+                break
+    if not dopasowane:
+        return wyniki
+    return dopasowane
+
+
 def dopasuj_oferty(wiadomosc, oferty):
     """Wyszukiwanie semantyczne (gdy dostępne) + słowa kluczowe; priorytet destynacji."""
     slowa = set(w.strip().lower() for w in wiadomosc.split() if len(w.strip()) > 1)
@@ -227,6 +263,7 @@ def dopasuj_oferty(wiadomosc, oferty):
     if model is not None and embeddings is not None:
         wyniki = _dopasuj_semantycznie(wiadomosc, oferty, model, embeddings)
         wyniki = _filtr_destynacja(wyniki, slowa)
+        wyniki = _filtr_aktywnosc(wyniki, wiadomosc)
         return [o for _, o in wyniki[:10]]
 
     # Fallback: tylko słowa kluczowe
@@ -245,6 +282,7 @@ def dopasuj_oferty(wiadomosc, oferty):
             wyniki.append((trafienia, o))
     wyniki.sort(key=lambda x: -x[0])
     wyniki = _filtr_destynacja(wyniki, slowa)
+    wyniki = _filtr_aktywnosc(wyniki, wiadomosc)
     return [o for _, o in wyniki[:10]]
 
 
