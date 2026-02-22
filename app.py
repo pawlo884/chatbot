@@ -221,6 +221,7 @@ _STOPWORDS_AKTYWNOSC = {
     "jest", "będzie", "może", "albo", "lub", "czy", "gdzie", "kiedy", "jak",
     "wycieczk", "wczasy", "oferty", "propozycj", "coś", "nic",
     "mam", "ochotę", "ochota", "mieć", "bardzo", "trochę", "raczej",
+    "przejechać", "przejechac", "przejażdżka", "przejazd",
 }
 
 
@@ -368,11 +369,29 @@ def _get_api_key(provider, secrets_key, env_key):
 
 def main():
     st.set_page_config(page_title="Chatbot – Oferty wycieczek", layout="centered")
+
+    # Klucz OpenAI na start (z env/secrets lub wklejony wcześniej w tej sesji)
+    key_from_env = _get_api_key("openai", "OPENAI_API_KEY", "OPENAI_API_KEY")
+    key_saved = st.session_state.get("openai_api_key", "")
+
+    if not key_from_env and not key_saved:
+        st.title("Klucz OpenAI")
+        st.markdown("Aby korzystać z chatu, wklej klucz API OpenAI (ChatGPT). Klucz nie jest zapisywany na serwerze.")
+        key_input = st.text_input("Klucz API OpenAI", type="password", placeholder="sk-...", key="openai_key_input")
+        if st.button("Zapisz i przejdź do chatu"):
+            if key_input and key_input.strip().startswith("sk-"):
+                st.session_state["openai_api_key"] = key_input.strip()
+                st.rerun()
+            else:
+                st.error("Wklej poprawny klucz OpenAI (zaczyna się od sk-).")
+        st.caption("Klucz możesz wygenerować w [platform.openai.com](https://platform.openai.com/api-keys).")
+        return
+
     st.title("Wycieczki – chatbot")
     st.caption("Oferty z SeePlaces (seeplaces.com). Opisz czego szukasz (np. Madera, Oman, safari), a zaproponuję wycieczki.")
 
     with st.sidebar:
-        st.subheader("LLM (opcjonalnie)")
+        st.subheader("LLM")
         provider = st.selectbox(
             "Generowanie odpowiedzi",
             options=["brak", "openai", "gemini"],
@@ -381,7 +400,14 @@ def main():
         )
         api_key = ""
         if provider == "openai":
-            api_key = _get_api_key(provider, "OPENAI_API_KEY", "OPENAI_API_KEY") or st.text_input("OpenAI API key", type="password", placeholder="sk-...")
+            api_key = key_from_env or key_saved
+            if not api_key:
+                api_key = st.text_input("OpenAI API key", type="password", placeholder="sk-...")
+            else:
+                st.caption("Klucz OpenAI zapisany")
+                if st.button("Usuń klucz z tej sesji"):
+                    st.session_state.pop("openai_api_key", None)
+                    st.rerun()
             if not openai:
                 st.warning("Zainstaluj: pip install openai")
         elif provider == "gemini":
