@@ -1,0 +1,34 @@
+# Środowisko
+venv/
+.venv/
+env/
+
+# Środowisko i klucze
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Cache i logi projektu
+oferty_embeddings.pkl
+guardrail.log
+*.log
+
+# IDE / system
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

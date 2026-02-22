@@ -1,0 +1,221 @@
+[
+  {
+    "id": 1,
+    "nazwa": "Zachód Wyspy Madera",
+    "destynacja": "Madera",
+    "opis": "Zachód Wyspy Madera. Madera. Czas trwania: 9h.",
+    "cena": 339.95,
+    "dni": 1,
+    "czas_trwania": "9h",
+    "tagi": [
+      "wycieczka",
+      "atrakcje",
+      "madera",
+      "9h",
+      "zachód",
+      "wyspy",
+      "seeplaces"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/madera/madera/zachod-wyspy-madera/"
+  },
+  {
+    "id": 2,
+    "nazwa": "Salalah - Wielki Meczet, Pałac Sułtana, souq",
+    "destynacja": "Salala, Oman",
+    "opis": "Salalah - Wielki Meczet, Pałac Sułtana, souq. Salala, Oman. Czas trwania: 4h.",
+    "cena": 134.19,
+    "dni": 1,
+    "czas_trwania": "4h",
+    "tagi": [
+      "meczet,",
+      "wielki",
+      "wycieczka",
+      "atrakcje",
+      "sułtana,",
+      "salalah",
+      "salala",
+      "pałac",
+      "oman",
+      "4h",
+      "seeplaces",
+      "souq"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/oman/salala/salalah-wielki-meczet-palac-sultana-souq/"
+  },
+  {
+    "id": 3,
+    "nazwa": "Stone Town i plantacja przypraw",
+    "destynacja": "Zanzibar",
+    "opis": "Stone Town i plantacja przypraw. Zanzibar. Czas trwania: cały dzień.",
+    "cena": 310.63,
+    "dni": 1,
+    "czas_trwania": "cały dzień",
+    "tagi": [
+      "wycieczka",
+      "zanzibar",
+      "atrakcje",
+      "całydzień",
+      "town",
+      "plantacja",
+      "seeplaces",
+      "przypraw",
+      "stone"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/zanzibar/zanzibar/stone-town-i-plantacja-przypraw/"
+  },
+  {
+    "id": 4,
+    "nazwa": "Wschód wyspy Madera",
+    "destynacja": "Madera",
+    "opis": "Wschód wyspy Madera. Madera. Czas trwania: 9h.",
+    "cena": 313.11,
+    "dni": 1,
+    "czas_trwania": "9h",
+    "tagi": [
+      "wschód",
+      "wycieczka",
+      "atrakcje",
+      "madera",
+      "9h",
+      "wyspy",
+      "seeplaces"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/madera/madera/wschod-wyspy-madera/"
+  },
+  {
+    "id": 5,
+    "nazwa": "Maskat City Tour z hotelu Barcelo Mussanah Resort",
+    "destynacja": "Maskat, Oman",
+    "opis": "Maskat City Tour z hotelu Barcelo Mussanah Resort. Maskat, Oman. Czas trwania: 9h.",
+    "cena": 215.37,
+    "dni": 1,
+    "czas_trwania": "9h",
+    "tagi": [
+      "barcelo",
+      "wycieczka",
+      "tour",
+      "mussanah",
+      "atrakcje",
+      "maskat",
+      "9h",
+      "oman",
+      "seeplaces",
+      "city",
+      "resort",
+      "hotelu"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/oman/maskat/maskat-city-tour-z-hotelu-barcelo-mussanah-resort/"
+  },
+  {
+    "id": 6,
+    "nazwa": "Wycieczka po wyspie „Sal, Mirages i Salinas” – cały dzień",
+    "destynacja": "Sal, Republika Zielonego Przylądka",
+    "opis": "Wycieczka po wyspie „Sal, Mirages i Salinas” – cały dzień. Sal, Republika Zielonego Przylądka. Czas trwania: 8h.",
+    "cena": 263.91,
+    "dni": 1,
+    "czas_trwania": "8h",
+    "tagi": [
+      "wycieczka",
+      "cały",
+      "atrakcje",
+      "mirages",
+      "sal",
+      "zielonego",
+      "przylądka",
+      "dzień",
+      "8h",
+      "„sal,",
+      "republika",
+      "salinas”",
+      "seeplaces",
+      "wyspie"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/republika-zielonego-przyladka/sal/wycieczka-po-wyspie-sal-mirages-i-salinas-caly-dzien/"
+  },
+  {
+    "id": 7,
+    "nazwa": "2-dniowe safari do Ngutuni i Salt Lick",
+    "destynacja": "Diani, Kenia",
+    "opis": "2-dniowe safari do Ngutuni i Salt Lick. Diani, Kenia. Czas trwania: 2 dni.",
+    "cena": 1656.67,
+    "dni": 2,
+    "czas_trwania": "2 dni",
+    "tagi": [
+      "diani",
+      "wycieczka",
+      "atrakcje",
+      "2dni",
+      "seeplaces",
+      "kenia",
+      "salt",
+      "lick",
+      "ngutuni",
+      "safari",
+      "2-dniowe"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/kenia/diani/2dniowe-safari-do-ngutuni-i-salt-lick/"
+  },
+  {
+    "id": 8,
+    "nazwa": "Piesza wycieczka i kąpiel w Wadi Shab",
+    "destynacja": "Maskat, Oman",
+    "opis": "Piesza wycieczka i kąpiel w Wadi Shab. Maskat, Oman. Czas trwania: cały dzień.",
+    "cena": 302.34,
+    "dni": 1,
+    "czas_trwania": "cały dzień",
+    "tagi": [
+      "wycieczka",
+      "atrakcje",
+      "shab",
+      "całydzień",
+      "oman",
+      "seeplaces",
+      "maskat",
+      "piesza",
+      "kąpiel",
+      "wadi"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/oman/maskat/piesza-wycieczka-i-kapiel-w-wadi-shab/"
+  },
+  {
+    "id": 9,
+    "nazwa": "Rajska wyspa Saona",
+    "destynacja": "La Romana, Dominikana",
+    "opis": "Rajska wyspa Saona. La Romana, Dominikana. Czas trwania: 8h.",
+    "cena": 414.17,
+    "dni": 1,
+    "czas_trwania": "8h",
+    "tagi": [
+      "wycieczka",
+      "rajska",
+      "atrakcje",
+      "wyspa",
+      "saona",
+      "romana",
+      "dominikana",
+      "seeplaces",
+      "8h"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/dominikana/la-romana/rajska-wyspa-saona/"
+  },
+  {
+    "id": 10,
+    "nazwa": "Zimowa Kapadocja",
+    "destynacja": "Kayseri, Turcja",
+    "opis": "Zimowa Kapadocja. Kayseri, Turcja. Czas trwania: 8h.",
+    "cena": 406.06,
+    "dni": 1,
+    "czas_trwania": "8h",
+    "tagi": [
+      "zimowa",
+      "wycieczka",
+      "atrakcje",
+      "turcja",
+      "kapadocja",
+      "kayseri",
+      "seeplaces",
+      "8h"
+    ],
+    "url": "https://seeplaces.com/pl/wycieczki/turcja/kayseri/zimowa-kapadocja/"
+  }
+]
